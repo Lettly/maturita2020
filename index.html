@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Maturità 2020</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+        />
+        <style>
+            html,
+            body {
+                height: 100%;
+                overflow-x: hidden;
+
+                /* https://www.svgbackgrounds.com/#rainbow-vortex */
+                background-color: #ff9d00;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23ff9d00' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23fb8d17' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23f47d24' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23ed6e2d' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23e35f34' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23d85239' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23cc453e' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23be3941' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23b02f43' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23a02644' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23901e44' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23801843' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%236f1341' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%235e0f3d' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%234e0c38' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%233e0933' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%232e062c' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            h1 {
+                font-size: 4em;
+            }
+
+            span {
+                -webkit-box-decoration-break: clone;
+                        box-decoration-break: clone;
+            }
+            span::before {
+                /* content: "\A";
+                white-space: pre; */
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="h-100 row align-items-center text-center text-white">
+            <div class="col">
+                <h1><span>La maturità 2020</span></h1>
+                <br />
+                <p>
+                    <h3 style="line-height: 1.9;">Si svolgera <span class="p-2 text-white" style="background: #A63D40;" id="dove"></span>
+                    <span class="p-2 text-white" style="background: #3E92CC;" id="quando"></span></h3>
+                </p>
+                <br />
+                <h2>Come?</h2>
+                <br />
+                <h3 style="line-height: 1.9;"><span
+                    class="text-white p-2"
+                    style="background: #386641;"
+                    id="come"
+                ></span></h3>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"
+></script>
+<script>
+    function random(min, max) {
+        var random = Math.floor(Math.random() * (+max - +min)) + +min;
+        return random;
+    }
+	
+    
+    var dove = $.ajax({
+        url : "dove.txt",
+        dataType: "text",
+        success : function (data) {
+            return data;
+        }
+    });
+
+    var quando = $.ajax({
+        url : "quando.txt",
+        dataType: "text",
+        success : function (data) {
+            return data;    
+              
+        }
+    });
+
+
+    var come = $.ajax({
+        url : "come.txt",
+        dataType: "text",
+        success : function (data) {
+            return data;  
+        }
+    });
+
+
+    come.then(function(result = []) {
+        var array = result.split("\n");
+        $("#come").html(array[random(0, array.length - 1)].trim());
+    }); 
+    quando.then(function(result) {
+        var array = result.split("\n");
+        $("#quando").html(array[random(0, array.length - 1)].trim());
+    });
+    dove.then(function(result) {
+        var array = result.split("\n");
+        $("#dove").html(array[random(0, array.length - 1)].trim());
+    });
+
+</script>
